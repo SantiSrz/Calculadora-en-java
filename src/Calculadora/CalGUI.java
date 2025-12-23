@@ -13,6 +13,11 @@ import java.awt.Color;
 public class CalGUI {
 
 	private JFrame frame;
+	
+	int num1 = 0;
+	int num2 = 0;
+	int resultado = 0;
+	String operador = "";
 
 	/**
 	 * Launch the application.
@@ -55,7 +60,7 @@ public class CalGUI {
 		JLabel TextBox = new JLabel("");
 		TextBox.setBackground(new Color(192, 192, 192));
 		TextBox.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		TextBox.setBounds(10, 48, 347, 72);
+		TextBox.setBounds(10, 29, 347, 72);
 		frame.getContentPane().add(TextBox);
 		
 		JButton btnNewButton = new JButton("1");
@@ -167,20 +172,27 @@ public class CalGUI {
 		btnNewButton_3_1_1.setBounds(99, 267, 79, 23);
 		frame.getContentPane().add(btnNewButton_3_1_1);
 		
-		JButton btnNewButton_1_1_1_1 = new JButton("DEL");
+		JButton btnNewButton_1_1_1_1 = new JButton("<--");
 		btnNewButton_1_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String textoActual = TextBox.getText();
+				if (textoActual.length() > 0) {
+		            String textoCortado = textoActual.substring(0, textoActual.length() - 1);
+		            TextBox.setText(textoCortado);
+				}
 			}
 		});
 		btnNewButton_1_1_1_1.setBackground(new Color(255, 220, 98));
 		btnNewButton_1_1_1_1.setBounds(10, 131, 79, 23);
 		frame.getContentPane().add(btnNewButton_1_1_1_1);
 		
-		JButton btnNewButton_2_1_1_1 = new JButton("BORR");
+		JButton btnNewButton_2_1_1_1 = new JButton("DEL");
 		btnNewButton_2_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				TextBox.setText("");
+				num1 = 0;
+				num2 = 0;
+				operador = "";
 			}
 		});
 		btnNewButton_2_1_1_1.setBackground(new Color(255, 220, 98));
@@ -190,7 +202,10 @@ public class CalGUI {
 		JButton btnNewButton_3_1_1_1 = new JButton("+");
 		btnNewButton_3_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				num1 = Integer.parseInt(TextBox.getText());
+				operador = "+";
+				TextBox.setText("");
+
 			}
 		});
 		btnNewButton_3_1_1_1.setBackground(new Color(255, 220, 98));
@@ -200,7 +215,9 @@ public class CalGUI {
 		JButton btnNewButton_1_1_1_1_1 = new JButton("-");
 		btnNewButton_1_1_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				num1 = Integer.parseInt(TextBox.getText());
+				operador = "-";
+				TextBox.setText("");
 			}
 		});
 		btnNewButton_1_1_1_1_1.setBackground(new Color(255, 220, 98));
@@ -210,7 +227,9 @@ public class CalGUI {
 		JButton btnNewButton_2_1_1_1_1 = new JButton("*");
 		btnNewButton_2_1_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				num1 = Integer.parseInt(TextBox.getText());
+				operador = "*";
+				TextBox.setText("");
 			}
 		});
 		btnNewButton_2_1_1_1_1.setBackground(new Color(255, 220, 98));
@@ -220,7 +239,9 @@ public class CalGUI {
 		JButton btnNewButton_3_1_1_2 = new JButton("/");
 		btnNewButton_3_1_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				num1 = Integer.parseInt(TextBox.getText());
+				operador = "/";
+				TextBox.setText("");
 			}
 		});
 		btnNewButton_3_1_1_2.setBackground(new Color(255, 220, 98));
@@ -230,7 +251,23 @@ public class CalGUI {
 		JButton btnNewButton_1_1_1_1_2 = new JButton("=");
 		btnNewButton_1_1_1_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				num2 = Integer.parseInt(TextBox.getText());
+				if (operador.equals("+")) {
+					resultado = num1 + num2;
+				}else if (operador.equals("-")) {
+					resultado = num1 - num2;
+				}else if (operador.equals("*")) {
+					resultado = num1 * num2;
+				}else if (operador.equals("/")) {
+					if (num2 != 0) {
+						resultado = num1 / num2;
+					}else {
+						TextBox.setText("Error");
+						return;
+					}
+				}
+				TextBox.setText(String.valueOf(resultado));
+				operador = "";
 			}
 		});
 		btnNewButton_1_1_1_1_2.setBackground(new Color(255, 220, 98));
@@ -238,7 +275,7 @@ public class CalGUI {
 		frame.getContentPane().add(btnNewButton_1_1_1_1_2);
 		
 		JLabel lblNewLabel_1 = new JLabel("Creado por Santiago Suarez Lorenzo");
-		lblNewLabel_1.setBounds(172, 104, 185, 16);
+		lblNewLabel_1.setBounds(10, 104, 226, 16);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		
