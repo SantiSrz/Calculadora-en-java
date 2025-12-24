@@ -15,8 +15,8 @@ public class CalCONSOLA {
 			}else{
 				String[] partes = entrada.split(" ");
 				if (partes.length != 3){
-					System.out.println("Error, la operacion debe tener dos numeros y una operacion por lo menos");
-					break;
+					System.out.println("Error, la operacion debe tener dos numeros y una operacion por lo menos, y debe estar separada por espacios");
+					continue;
 				}else{
 					int numero1 = Integer.parseInt(partes[0]);
 					int numero2 = Integer.parseInt(partes[2]);
